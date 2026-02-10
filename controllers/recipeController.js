@@ -1,13 +1,32 @@
+const Recipe = require('../models/Recipe')
 
-
-
-
-exports.insertRecipe=(req,res)=>{
-
+exports.addRecipe=async(req,res)=>{
+    try {
+        const recipe = await Recipe.create(req.body)
+        res.json(recipe)
+    }
+    catch (error) {
+     console.log(error.message)
+    }
 }
-exports.deleteRecipe=(req,res)=>{
 
+exports.deleteRecipe =async(req,res)=>{
+   await Recipe.findByIdAndDelete(req.params.id)
+    res.json({message:'Deleted'})
 }
-exports.updateRecipe=(req,res)=>{
 
+exports.updateRecipe =async(req,res)=>{
+      try {
+    const recipe = await Recipe.findByIdAndUpdate(req.params.id,req.body,{ returnDocument: 'after' })
+    res.json(recipe)
+  } catch (err) {
+      console.log(error.message)
+  }
 }
+
+
+
+
+
+
+

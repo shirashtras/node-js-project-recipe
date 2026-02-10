@@ -1,13 +1,9 @@
-const express=require('express')
-const router=express.Router();
+const express = require('express')
+const router = express.Router()
+const { addRecipe, deleteRecipe, updateRecipe } = require('../controllers/recipeController')
 
-const{insertRecipe,deleteRecipe,updateRecipe}=require('../controllers/recipeController')
+router.post('/insertRecipe', addRecipe)
+router.delete('/:id', deleteRecipe)
+router.put('/:id', updateRecipe)
 
-router.post('/insertRecipe',insertRecipe)
-router.delete('/deleteRecipe',deleteRecipe)
-router.put('/updateRecipe',updateRecipe)
-
-module.exports=router
-
-
-
+module.exports = router
